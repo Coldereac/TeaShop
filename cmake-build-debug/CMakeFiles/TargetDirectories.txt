@@ -1,0 +1,3 @@
+/home/malinka/CLionProjects/TeaShop/cmake-build-debug/CMakeFiles/TeaShop.dir
+/home/malinka/CLionProjects/TeaShop/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/malinka/CLionProjects/TeaShop/cmake-build-debug/CMakeFiles/rebuild_cache.dir
