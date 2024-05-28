@@ -56,7 +56,6 @@ void menu() {
                 break;
             case 8:
                 saveRecipesToFile(FILENAME);
-                printf("Recipes saved to file.\n");
                 break;
             case 0:
                 saveRecipesToFile(FILENAME);
@@ -332,7 +331,7 @@ void outputQuantity(Ingredient ing) {
 
 void displayRecipes() {
     for (int i = 0; i < teaRecipes.size; i++) {
-        printf("\nRecipe %d:\n", i);
+        printf("\nRecipe %d:\n", teaRecipes.array[i].index);
         printf("Name: %s\n", teaRecipes.array[i].name);
         printf("Tea Type: ");
         outputTeaType(teaRecipes.array[i]);
@@ -342,12 +341,14 @@ void displayRecipes() {
         outputQuantity(teaRecipes.array[i].mainIngredient);
         outputMeasurmentUnit(teaRecipes.array[i].mainIngredient);
         printf(")\n");
-        printf("Additional Ingredients:\n");
-        for (int j = 0; j < teaRecipes.array[i].numAdditionalIngredients; j++) {
-            printf("  %s (", teaRecipes.array[i].additionalIngredients[j].name);
-            outputQuantity(teaRecipes.array[i].additionalIngredients[j]);
-            outputMeasurmentUnit(teaRecipes.array[i].additionalIngredients[j]);
-            printf(")\n");
+        if (teaRecipes.array[i].numAdditionalIngredients != 0) {
+            printf("Additional Ingredients:\n");
+            for (int j = 0; j < teaRecipes.array[i].numAdditionalIngredients; j++) {
+                printf("  %s (", teaRecipes.array[i].additionalIngredients[j].name);
+                outputQuantity(teaRecipes.array[i].additionalIngredients[j]);
+                outputMeasurmentUnit(teaRecipes.array[i].additionalIngredients[j]);
+                printf(")\n");
+            }
         }
     }
 }
@@ -424,6 +425,7 @@ void saveRecipesToFile(const char *filename) {
     }
     fwrite(&teaRecipes.size, sizeof(int), 1, file);
     fwrite(teaRecipes.array, sizeof(TeaRecipe), teaRecipes.size, file);
+    puts("Recipes was saved successfully");
     fclose(file);
 }
 
